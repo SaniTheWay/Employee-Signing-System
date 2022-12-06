@@ -1,0 +1,49 @@
+﻿@model Employee_Signing_System.Models.EmployeeStandardVert
+
+@{
+    ViewData["Title"] = "SignIn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>SignIn</h1>
+
+<h4>EmployeeStandardVert</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SignIn">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EFirstName" class="control-label"></label>
+                <input asp-for="EFirstName" class="form-control" />
+                <span asp-validation-for="EFirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ELastName" class="control-label"></label>
+                <input asp-for="ELastName" class="form-control" />
+                <span asp-validation-for="ELastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhotoUrl" class="control-label"></label>
+                <input asp-for="PhotoUrl" class="form-control" />
+                <span asp-validation-for="PhotoUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
