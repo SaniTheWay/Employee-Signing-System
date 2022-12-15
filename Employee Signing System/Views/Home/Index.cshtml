@@ -1,8 +1,42 @@
-﻿@{
+﻿@model IEnumerable<Employee_Signing_System.Models.Entity.EmployeeStandardVert>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div>
+        @using (Html.BeginForm("Get_EmpList", "Home", FormMethod.Get))
+        {
+            <label>@Html.DisplayNameFor(model=> model.EFirstName)</label>
+            <input type="text" id="fname" name="fname" runat="server" />
+            <label>@Html.DisplayNameFor(model=> model.ELastName)</label>
+            <input type="text" id="lname" name="lname" runat="server" />
+            <br />
+            <input type="submit" value="submit" class="btn-primary">
+        }
+    </div>
+    @if (Model != null)
+    {
+        <div style="height:50px;"></div>
+        <div>
+            <table>
+                <thead>
+                    <th>Employee Picture</th>
+                    <th>Employee fname</th>
+                    <th>Employee lname</th>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td><img src="@item.PhotoUrl" width="100" /></td>
+                            <td>@item.EFirstName</td>
+                            <td>@item.ELastName</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
 </div>

@@ -1,4 +1,6 @@
-using Employee_Signing_System.Models;
+using Employee_Signing_System.Models.Entity;
+using Employee_Signing_System.Repositories;
+using Employee_Signing_System.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,9 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-var connectionString = builder.Configuration.GetConnectionString("SystemDB");
+string? connectionString = builder.Configuration.GetConnectionString("MyConn");
 builder.Services.AddDbContext<EmployeeSigningSystemContext>(options => options.UseSqlServer(connectionString));
-
+builder.Services.AddScoped<IDbRepository, DbRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 
 var app = builder.Build();

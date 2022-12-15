@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Employee_Signing_System.Models;
+namespace Employee_Signing_System.Models.Entity;
 
 public partial class EmployeeTempBadge
 {
