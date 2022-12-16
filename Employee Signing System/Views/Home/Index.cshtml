@@ -16,6 +16,7 @@
             <input type="submit" value="submit" class="btn-primary">
         }
     </div>
+
     @if (Model != null)
     {
         <div style="height:50px;"></div>
@@ -26,16 +27,23 @@
                     <th>Employee fname</th>
                     <th>Employee lname</th>
                 </thead>
-                <tbody>
-                    @foreach (var item in Model)
+                    @using (Html.BeginForm("Emp_EnQueue", "Home", FormMethod.Post))
                     {
-                        <tr>
-                            <td><img src="@item.PhotoUrl" width="100" /></td>
-                            <td>@item.EFirstName</td>
-                            <td>@item.ELastName</td>
-                        </tr>
-                    }
+                <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td> @Html.RadioButton("imgId", item.Id ,new {@id=item.Id}) 
+                                @*<td>@Html.Label(item.EFirstName+" "+item.ELastName, new { @for = item.Id}) </td>*@
+                                <img src="@item.PhotoUrl" width="100" /></td>
+                                <td>@item.EFirstName</td>
+                                <td>@item.ELastName</td>
+                                
+                            </tr>
+                        }
+                        <input type="submit" value="submit" class="btn-primary">
                 </tbody>
+                    }
             </table>
         </div>
     }

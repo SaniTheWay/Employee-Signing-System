@@ -30,10 +30,11 @@ namespace Employee_Signing_System.Controllers
         }
 
         [HttpPost]
-        public IActionResult Emp_EnQueue(id)
+        public IActionResult Emp_EnQueue(int imgId)
         {
-            if(ReqEnqueue(id))
-                ViewBag.status = HttpStatusCode.Accepted;
+            Console.WriteLine("Selected ImageId : "+imgId);
+            if ( _userService.queue_req(imgId) )
+                ViewBag.status = (int)HttpStatusCode.Accepted;
             return View("Index");
         }
 
