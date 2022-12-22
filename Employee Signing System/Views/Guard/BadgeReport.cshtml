@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Employee_Signing_System.Models.Entity.EmployeeTempBadge>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    DateTime rngMin = (DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+
+    DateTime rngMax = (DateTime)System.Data.SqlTypes.SqlDateTime.MaxValue;
+}
+<h3>Badge Report Page</h3>
+<div class="container">
+    <div class="row">
+        @using (Html.BeginForm("BadgeReport", "Guard", FormMethod.Post))
+        {
+        <lable>Start Date</lable>
+            <input type="date" name="sDate" value="@DateTime.Today" min="1/1/1753" max="@DateTime.Today" runat="server"/>
+
+        <lable>End Date</lable>
+            <input type="date" name="eDate" value="@DateTime.Today" min="1/1/1753"  max="@DateTime.Today" runat="server"/>
+
+        <lable>First Name</lable>
+        <input type="text" name="fName" />
+
+        <lable>Last Name</lable>
+        <input type="text" name="lName"/>
+
+        <lable>inactive only</lable>
+        <input type="checkbox" name="activeCheck" />
+
+        <input type="submit" value="submit" class="btn-info"/>
+            
+        }
+    </div>
+    <div class="row">
+        <div class="container-fluid">
+        <table class="table">
+            <thead>
+                <th>Name</th>
+                <th>Badge</th>
+                <th>Sign In Time</th>
+                <th>Assign Time</th>
+                <th>Sign Out Time</th>
+            </thead>
+            <tbody class="table-striped table-hover">
+                @if (Model!=null)
+                {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.EmployeeFirstName @item.EmployeeLastName</td>
+                        <td>@item.TempBadge</td>
+                        <td>@item.SignInT</td>
+                        <td>@item.AssignT</td>
+                        <td>@item.SignOutT</td>
+                    </tr>
+                }
+                    
+                }
+            </tbody>
+        </table>
+        </div>
+    </div>
+
+
+</div>

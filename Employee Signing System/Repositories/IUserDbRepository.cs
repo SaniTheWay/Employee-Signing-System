@@ -2,8 +2,10 @@
 
 namespace Employee_Signing_System.Repositories
 {
-    public interface IDbRepository
+    public interface IUserDbRepository
     {
         List<EmployeeStandardVert> GetList(string fname, string lname);
+        bool AddTempRecord(int id);
+        bool AssignSignOut(string badge);
     }
 }

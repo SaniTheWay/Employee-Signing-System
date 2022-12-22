@@ -2,8 +2,14 @@
 
 @{
     ViewData["Title"] = "Home Page";
+    var status = ViewBag.status;
 }
-
+@if (status != null)
+{
+    <div class="alert alert-success" role="alert">
+        <code>Status- @status</code>
+    </div>
+}
 <div class="text-center">
     <div>
         @using (Html.BeginForm("Get_EmpList", "Home", FormMethod.Get))
@@ -13,38 +19,40 @@
             <label>@Html.DisplayNameFor(model=> model.ELastName)</label>
             <input type="text" id="lname" name="lname" runat="server" />
             <br />
-            <input type="submit" value="submit" class="btn-primary">
+            <input type="submit" value="submit" class="btn-success">
         }
-    </div>
+    
 
     @if (Model != null)
     {
         <div style="height:50px;"></div>
         <div>
-            <table>
+            <h4>Results:</h4>
+            <table class="container">
                 <thead>
                     <th>Employee Picture</th>
-                    <th>Employee fname</th>
-                    <th>Employee lname</th>
+                    <th>Employee Name</th>
+                    <th></th>
                 </thead>
                     @using (Html.BeginForm("Emp_EnQueue", "Home", FormMethod.Post))
                     {
-                <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td> @Html.RadioButton("imgId", item.Id ,new {@id=item.Id}) 
-                                @*<td>@Html.Label(item.EFirstName+" "+item.ELastName, new { @for = item.Id}) </td>*@
-                                <img src="@item.PhotoUrl" width="100" /></td>
-                                <td>@item.EFirstName</td>
-                                <td>@item.ELastName</td>
-                                
-                            </tr>
-                        }
-                        <input type="submit" value="submit" class="btn-primary">
-                </tbody>
+                    <tbody class="table table-striped">
+                        <div class="col-md-auto">
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    @*<td>@Html.Label(item.EFirstName+" "+item.ELastName, new { @for = item.Id}) </td>*@
+                                    <td><img src="@item.PhotoUrl" width="100" /></td>
+                                    <td>@item.EFirstName @item.ELastName</td>
+                                    <td> @Html.RadioButton("imgId", item.Id ,new {@id=item.Id}) </td>
+                                </tr>
+                            }
+                        <input type="submit" value="Send Request!" class="border-success">
+                        </div>  
+                    </tbody>
                     }
             </table>
         </div>
     }
+</div>
 </div>

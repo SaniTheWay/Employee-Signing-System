@@ -1,0 +1,29 @@
+﻿@model Employee_Signing_System.Models.ViewModel.GuardOut
+
+<h3>Guard Out Badges:</h3>
+<h5><code>Assigned Badges Record</code></h5>
+@if (Model == null)
+{
+    <p> Not Assigned anyone yet, today.</p>
+}
+<div class="container">
+    <table class="table align-content-center">
+        <thead>
+            <th>Picture</th>
+            <th>Name</th>
+            <th>Badge No.</th>
+            <th>Assign Time</th>
+        </thead>
+        <tbody class="table-striped p-5 align-content-center">
+            @foreach (var item in Model.TempEmpRecord)
+            {
+                <tr>
+                    <td><i>IMG</i></td>
+                    <td>@item.EmployeeFirstName @item.EmployeeLastName</td>
+                    <td>@item.TempBadge</td>
+                    <td>@item.AssignT.Value.TimeOfDay</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

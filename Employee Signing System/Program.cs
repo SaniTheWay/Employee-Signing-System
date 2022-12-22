@@ -11,7 +11,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 string? connectionString = builder.Configuration.GetConnectionString("MyConn");
 builder.Services.AddDbContext<EmployeeSigningSystemContext>(options => options.UseSqlServer(connectionString));
-builder.Services.AddScoped<IDbRepository, DbRepository>();
+
+//Repositories Registration
+builder.Services.AddScoped<IUserDbRepository, UserDbRepository>();
+builder.Services.AddScoped<IGuardDbRepository, GuardDbRepository>();
+
+//Services Registration
+builder.Services.AddScoped<IGuardService, GuardService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
 

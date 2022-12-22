@@ -33,11 +33,20 @@ namespace Employee_Signing_System.Controllers
         public IActionResult Emp_EnQueue(int imgId)
         {
             Console.WriteLine("Selected ImageId : "+imgId);
-            if ( _userService.queue_req(imgId) )
-                ViewBag.status = (int)HttpStatusCode.Accepted;
+            ViewBag.status = _userService.queue_req(imgId);
             return View("Index");
         }
-
+        public ActionResult SignOut()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult SignOut(string badge)
+        {
+            var q = _userService.s_SignOut(badge);
+            ViewBag.status = q;
+            return View("Index");
+        }
         public IActionResult Privacy()
         {
             return View();

@@ -5,13 +5,13 @@ namespace Employee_Signing_System.Models.Entity;
 
 public partial class EmployeeTempBadge
 {
-    public string Id { get; set; } = null!;
+    public int Id { get; set; }
 
     public string EmployeeFirstName { get; set; } = null!;
 
     public string EmployeeLastName { get; set; } = null!;
 
-    public string TempBadge { get; set; } = null!;
+    public string? TempBadge { get; set; }
 
     public DateTime SignInT { get; set; }
 

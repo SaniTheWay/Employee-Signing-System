@@ -5,7 +5,7 @@ namespace Employee_Signing_System.Models.Entity;
 
 public partial class EmployeeStandardVert
 {
-    public string Id { get; set; } = null!;
+    public int Id { get; set; }
 
     public string EFirstName { get; set; } = null!;
 

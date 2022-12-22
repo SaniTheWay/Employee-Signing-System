@@ -1,0 +1,51 @@
+﻿@model Employee_Signing_System.Models.ViewModel.GuardQueue
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var status = ViewBag.status;
+}
+@if (status != null)
+{
+    <div class="alert alert-success" role="alert">
+        <code>Status- @status</code>
+    </div>
+}
+<h3>Guard Badge Queue Page</h3>
+<br />
+<div>
+    @if (Model == null)
+    {
+        <h5>No Requests in Queue.</h5>
+    }
+    else{
+    <table class="table">
+
+        <thead>
+            <th>Picture</th>
+            <th>Name</th>
+            <th>Badge</th>
+            <th>Emp Status</th>
+            <th></th>
+        </thead>
+        <tbody class="table-striped p-5 align-content-center">
+            @foreach (var item in Model.TempEmployee)
+            {
+                @using (Html.BeginForm("Queue", "Guard", FormMethod.Post))
+                {
+                    <tr>
+                        <td><i>IMG</i></td>
+                        <td>@item.EmployeeFirstName @item.EmployeeLastName</td>
+                        <td><input type="text" name="badge" id="@item.Id" required/></td>
+                        <td>##Status##</td>
+                        <input type="hidden" name="UId" value="@item.Id"/>
+                        <input type="hidden" name="assignTime" value="@DateTime.Now">
+                        <td><input type="submit" value="Assign Badge" /></td>
+                    </tr>
+                }
+            }
+        </tbody>
+
+    </table>
+    }
+</div>
