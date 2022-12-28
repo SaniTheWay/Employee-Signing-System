@@ -30,7 +30,9 @@ namespace Employee_Signing_System.Services
         public int queue_req(int id)
         {
             if(id == 0)return (int)HttpStatusCode.BadRequest;
+
             var q = _dbService.AddTempRecord(id);
+
             if (q is true)
             {
                

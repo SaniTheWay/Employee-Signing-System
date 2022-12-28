@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Employee_Signing_System.Models.Entity;
 
-public partial class EmployeeSigningSystemContext : DbContext
+public partial class EmployeeSigningSystemContext : IdentityDbContext
 {
     public EmployeeSigningSystemContext()
     {
@@ -25,6 +26,7 @@ public partial class EmployeeSigningSystemContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<EmployeeStandardVert>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK_EmployeeStandardVert_1");

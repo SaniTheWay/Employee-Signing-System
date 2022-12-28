@@ -22,6 +22,7 @@ namespace Employee_Signing_System.Controllers
         {
             return View();
         }
+
         [HttpGet]
         public IActionResult Get_EmpList(string fname, string? lname)
         {

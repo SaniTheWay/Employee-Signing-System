@@ -22,7 +22,7 @@ namespace Employee_Signing_System.Repositories
         public List<EmployeeStandardVert> GetList(string fname, string? lname)
         {
             var empList = _db.EmployeeStandardVerts.Where(q => 
-                            q.EFirstName == fname || q.ELastName==lname)
+                            q.EFirstName.Contains( fname ) || q.ELastName.Contains(lname))
                                 .ToList();
             return empList;
         }
@@ -38,6 +38,7 @@ namespace Employee_Signing_System.Repositories
             if(emp == null) return false;
             EmployeeTempBadge newRec = new EmployeeTempBadge
             {
+                EmpId = emp.Id,
                 EmployeeFirstName = emp.EFirstName,
                 EmployeeLastName = emp?.ELastName,
                 SignInT = DateTime.Now,

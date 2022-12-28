@@ -13,10 +13,10 @@
         @using (Html.BeginForm("BadgeReport", "Guard", FormMethod.Post))
         {
         <lable>Start Date</lable>
-            <input type="date" name="sDate" value="@DateTime.Today" min="1/1/1753" max="@DateTime.Today" runat="server"/>
+            <input type="datetime-local" name="sDate" value="@DateTime.Today" runat="server" />
 
         <lable>End Date</lable>
-            <input type="date" name="eDate" value="@DateTime.Today" min="1/1/1753"  max="@DateTime.Today" runat="server"/>
+            <input type="datetime-local" name="eDate" value="@DateTime.Today" runat="server" />
 
         <lable>First Name</lable>
         <input type="text" name="fName" />
@@ -24,10 +24,10 @@
         <lable>Last Name</lable>
         <input type="text" name="lName"/>
 
-        <lable>inactive only</lable>
-        <input type="checkbox" name="activeCheck" />
+        @*<lable>inactive only</lable>
+        <input type="checkbox" name="activeCheck" />*@
 
-        <input type="submit" value="submit" class="btn-info"/>
+        <button type="submit" value="Search" class="btn btn-info">Search</button>
             
         }
     </div>

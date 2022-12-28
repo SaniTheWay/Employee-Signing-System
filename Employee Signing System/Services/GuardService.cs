@@ -1,4 +1,5 @@
 ﻿using Employee_Signing_System.Models.Entity;
+using Employee_Signing_System.Models.ViewModel;
 using Employee_Signing_System.Repositories;
 using System.Net;
 
@@ -12,7 +13,7 @@ namespace Employee_Signing_System.Services
             _db = dbService;
         }
 
-        public IQueryable<EmployeeTempBadge> BadgeQueue()
+        public IQueryable<GuardQueue> BadgeQueue()
         {
             var queue = _db.getBadgeQueue();
             return queue;
@@ -28,7 +29,7 @@ namespace Employee_Signing_System.Services
             return  (int)HttpStatusCode.Accepted;
         }
 
-        public IQueryable<EmployeeTempBadge> s_OutList()
+        public IQueryable<GuardQueue> s_OutList()
         {
             var q = _db.getOutList();
             return q;

@@ -2,6 +2,7 @@ using Employee_Signing_System.Models.Entity;
 using Employee_Signing_System.Repositories;
 using Employee_Signing_System.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 //var provider = builder.Services.BuildServiceProvider();
@@ -11,6 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 string? connectionString = builder.Configuration.GetConnectionString("MyConn");
 builder.Services.AddDbContext<EmployeeSigningSystemContext>(options => options.UseSqlServer(connectionString));
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<EmployeeSigningSystemContext>();
 
 //Repositories Registration
 builder.Services.AddScoped<IUserDbRepository, UserDbRepository>();
@@ -35,6 +38,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
 

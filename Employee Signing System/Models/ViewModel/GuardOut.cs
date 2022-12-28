@@ -4,6 +4,7 @@ namespace Employee_Signing_System.Models.ViewModel
 {
     public class GuardOut
     {
-        public IEnumerable<EmployeeTempBadge> TempEmpRecord { get; set; } = null!;
+        public EmployeeTempBadge TempEmpRecord { get; set; } = null!;
+        public string TempImage { get; set; }
     }
 }

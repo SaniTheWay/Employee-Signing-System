@@ -1,6 +1,7 @@
 ﻿using Employee_Signing_System.Models.Entity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Employee_Signing_System.Models.ViewModel;
 
 namespace Employee_Signing_System.Repositories
 {
@@ -19,11 +20,19 @@ namespace Employee_Signing_System.Repositories
 
         #region Get Queue
 
-        public IQueryable<EmployeeTempBadge> getBadgeQueue()
+        public IQueryable<GuardQueue> getBadgeQueue()
         {
             /* List all requests with Assign Time -> 'null' in TempBadge Table */
 
-            var q = _db.EmployeeTempBadges.Where(e=> e.AssignT == null);
+            //var q = _db.EmployeeTempBadges.Where(e=> e.AssignT == null);
+            var q = _db.EmployeeTempBadges.Join(_db.EmployeeStandardVerts,
+                                                s => s.EmpId, t => t.Id,
+                                                (s,t)=> new GuardQueue
+                                                {
+                                                    TempEmployee = s,
+                                                    TempEmpImg = t.PhotoUrl!
+                                                }                                               
+                                                ).Where(e => e.TempEmployee.AssignT == null);
             return q;
         }
 
@@ -62,27 +71,37 @@ namespace Employee_Signing_System.Repositories
             return true;
         }
 
-        public IQueryable<EmployeeTempBadge> getOutList()
+        public IQueryable<GuardQueue> getOutList()
         {
-            var q = _db.EmployeeTempBadges.Where(e => e.AssignT != null && e.SignOutT==null);
+            //var q = _db.EmployeeTempBadges.Where(e => e.AssignT != null && e.SignOutT==null);
+
+            var q = _db.EmployeeTempBadges.Join(_db.EmployeeStandardVerts,
+                                                s => s.EmpId, t => t.Id,
+                                                (s, t) => new GuardQueue
+                                                {
+                                                    TempEmployee = s,
+                                                    TempEmpImg = t.PhotoUrl!
+                                                }
+                                                ).Where(e => e.TempEmployee.AssignT != null && e.TempEmployee.SignOutT == null);
+
             return q;
         }
 
         public IQueryable<EmployeeTempBadge> getReport(DateTime sDate, DateTime eDate,
                                         string? fName, string? lName)
         {
+            
             IQueryable<EmployeeTempBadge> q;
             if (fName == null && lName == null)
             {
                 q = _db.EmployeeTempBadges.Where(e =>
-                e.SignInT.Date >= sDate && e.SignInT.Date <= eDate).AsQueryable();
+                e.SignInT.Date >= sDate && e.SignInT.Date <= eDate);
             }
             else
             {
                 q = _db.EmployeeTempBadges.Where(e =>
                 e.SignInT.Date >= sDate && e.SignInT.Date <= eDate
-                && (e.EmployeeFirstName == fName || e.EmployeeLastName==lName))
-                    .AsQueryable();
+                && (e.EmployeeFirstName.Contains(fName) || e.EmployeeLastName.Contains(lName)));
             }
             return q;
         }

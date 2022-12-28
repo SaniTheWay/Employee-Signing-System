@@ -4,7 +4,8 @@ namespace Employee_Signing_System.Models.ViewModel
 {
     public class GuardQueue
     {
-        public IEnumerable<EmployeeTempBadge> TempEmployee { get; set; } = null!;
+        public EmployeeTempBadge TempEmployee { get; set; } = null!;
+        public string TempEmpImg { get; set; }
         //public int? status { get; set; }
     }
 }
