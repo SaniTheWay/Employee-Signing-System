@@ -16,7 +16,7 @@ namespace Employee_Signing_System.Controllers
         }
 
         [HttpGet]
-        [Route("register")]
+        //[Route("register")]
         public IActionResult Register()
         {
             if (!HttpContext.User.Identity.IsAuthenticated)
@@ -30,7 +30,7 @@ namespace Employee_Signing_System.Controllers
         }
 
         [HttpPost]
-        [Route("register")]
+        //[Route("register")]
         public async Task<IActionResult> Register(Register_VM model)
         {
             if(ModelState.IsValid)
@@ -67,7 +67,7 @@ namespace Employee_Signing_System.Controllers
         }   
 
         [HttpGet]
-        [Route("login")]
+        //[Route("login")]
         public IActionResult Login()
         {
             if (!HttpContext.User.Identity.IsAuthenticated)
@@ -79,7 +79,7 @@ namespace Employee_Signing_System.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Route("login")]
+        //[Route("login")]
         public async Task<IActionResult> Login(Login_VM model)
         {
             if (ModelState.IsValid)
