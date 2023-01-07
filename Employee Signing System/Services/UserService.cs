@@ -19,6 +19,10 @@ namespace Employee_Signing_System.Services
         /* Search by 'Firstname' and 'Lastname' from EmployeeTable */
         public List<EmployeeStandardVert> signin_search(string fname, string? lname)
         {
+            if (string.IsNullOrEmpty(fname) && string.IsNullOrEmpty(lname))
+            {
+                return null;
+            }
             var empList = _dbService.GetList(fname, lname!);
             return empList;
         }

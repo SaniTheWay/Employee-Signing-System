@@ -90,19 +90,52 @@ namespace Employee_Signing_System.Repositories
         public IQueryable<EmployeeTempBadge> getReport(DateTime sDate, DateTime eDate,
                                         string? fName, string? lName)
         {
-            
-            IQueryable<EmployeeTempBadge> q;
-            if (fName == null && lName == null)
+
+            #region Nesting SQL Queries
+            /*
+             * for big data, we use to specify the data for easy searching
+             * The search then only be done over that data (where, 'var q' initializing)
+             * 
+             * Here we are nesting the query one after another by using if statements
+             */
+
+            IQueryable<EmployeeTempBadge> q = _db.EmployeeTempBadges.Where(x => x.EmployeeFirstName != null);
+
+            if (!string.IsNullOrEmpty(fName))
             {
-                q = _db.EmployeeTempBadges.Where(e =>
-                e.SignInT.Date >= sDate && e.SignInT.Date <= eDate);
+                q = q.Where(e => e.EmployeeFirstName.Contains(fName));
             }
-            else
+            if (!string.IsNullOrEmpty(lName))
             {
-                q = _db.EmployeeTempBadges.Where(e =>
-                e.SignInT.Date >= sDate && e.SignInT.Date <= eDate
-                && (e.EmployeeFirstName.Contains(fName) || e.EmployeeLastName.Contains(lName)));
+                q = q.Where(e => e.EmployeeLastName.Contains(lName));
             }
+            if(!(sDate == DateTime.MinValue))
+            {
+                q = q.Where(e => e.SignInT.Date >= sDate.Date);
+            }
+            if (!(eDate == DateTime.MinValue))
+            {
+                q = q.Where(e => e.SignInT.Date <= eDate.Date);
+            }
+
+            #endregion
+
+            #region No Nesting
+
+            //if (fName == null && lName == null)
+            //{
+            //    q = _db.EmployeeTempBadges.Where(e =>
+            //    e.SignInT.Date >= sDate && e.SignInT.Date <= eDate);
+            //}
+            //else
+            //{
+            //    q = _db.EmployeeTempBadges.Where(e =>
+            //    e.SignInT.Date >= sDate && e.SignInT.Date <= eDate
+            //    && (e.EmployeeFirstName.Contains(fName) || e.EmployeeLastName.Contains(lName)));
+            //}
+            #endregion
+
+
             return q;
         }
         #endregion

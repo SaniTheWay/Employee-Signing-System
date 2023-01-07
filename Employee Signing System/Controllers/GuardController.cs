@@ -1,12 +1,8 @@
 ﻿using Employee_Signing_System.Models.ViewModel;
 using Employee_Signing_System.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using System.Net;
-using System.Reflection.Metadata;
+
 
 namespace Employee_Signing_System.Controllers
 {
@@ -24,7 +20,10 @@ namespace Employee_Signing_System.Controllers
             return View();
         }
 
-        // GET
+        #region Queue
+
+
+        // Queue Requests created by Employee
         [Authorize]
         public ActionResult Queue()
         {
@@ -36,6 +35,8 @@ namespace Employee_Signing_System.Controllers
             //};
             return View(model);
         }
+
+        // Assign Badge to the Employee with AssignTime
         [HttpPost]
         [Authorize]
         public ActionResult Queue(int UId, string badge, DateTime assignTime)
@@ -46,6 +47,8 @@ namespace Employee_Signing_System.Controllers
             //return Redirect("Queue");
             //return View("Queue");
         }
+        #endregion
+
 
         [Authorize]
         public ActionResult BadgeOut()
@@ -68,17 +71,19 @@ namespace Employee_Signing_System.Controllers
         public ActionResult BadgeReport(DateTime sDate, DateTime eDate,
                                         string? fName, string? lName)
         {
-            if(sDate==DateTime.MinValue)
+            //Check for SQL Error
+
+            /*if(sDate==DateTime.MinValue)
             {
                 string dateInput = "Jan 1, 2022";
                 sDate = DateTime.Parse(dateInput);
             }
-            if(eDate==DateTime.MinValue){ eDate = DateTime.Now; }
+            if(eDate==DateTime.MinValue){ eDate = DateTime.Now; } */
 
             var model = _service.GetReport(sDate, eDate, fName, lName);
 
             return View(model);
-        }
+         }
 
     }
 }

@@ -23,20 +23,34 @@ namespace Employee_Signing_System.Controllers
             return View();
         }
 
+        // Employee Sign In Page 
+        #region Employee SignIn
+
+        // to get List after Search by 'FName' and 'LName'
+
         [HttpGet]
         public IActionResult Get_EmpList(string fname, string? lname)
         {
             var list = _userService.signin_search(fname, lname);
+            if(list == null)
+                ViewBag.status = (int)HttpStatusCode.NotAcceptable;
             return View("Index",list.AsEnumerable());
         }
+
+        // Employee Submit request 
 
         [HttpPost]
         public IActionResult Emp_EnQueue(int imgId)
         {
-            Console.WriteLine("Selected ImageId : "+imgId);
+            //Console.WriteLine("Selected ImageId : "+imgId);
             ViewBag.status = _userService.queue_req(imgId);
             return View("Index");
         }
+        #endregion
+
+        // Employee SignOut
+        #region Employee SignOut
+
         public ActionResult SignOut()
         {
             return View();
@@ -48,6 +62,7 @@ namespace Employee_Signing_System.Controllers
             ViewBag.status = q;
             return View("Index");
         }
+        #endregion
         public IActionResult Privacy()
         {
             return View();

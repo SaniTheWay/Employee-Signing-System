@@ -1,5 +1,4 @@
 ﻿using Employee_Signing_System.Models.Entity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Employee_Signing_System.Repositories

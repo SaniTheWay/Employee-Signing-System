@@ -19,6 +19,12 @@
             <code>Request Not Created.</code>
         </div>
     }
+    if (status == 406)
+    {
+        <div class="alert alert-danger" role="alert">
+            <code>Request not Acceptable.</code>
+        </div>
+    }
     @*Signout Message*@
     if (status == 404)
     {
@@ -46,7 +52,7 @@
         }
     
 
-    @if (Model != null)
+    @if (Model != null && status!=406)
     {
         <div style="height:50px;"></div>
         <div>
