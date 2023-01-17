@@ -19,15 +19,18 @@
             <code>Badge Assigned.</code>
         </div>
     }
+
 }
 <h3>Guard Badge Queue Page</h3>
 <br />
 <div>
-    @if (Model == null)
-    {
-        <h5>No Requests in Queue.</h5>
-    }
-    else{
+@if (Model.Count() == 0)
+{
+    <div class="alert alert-info" role="alert">
+        <code>No Badge Requested.</code>
+    </div>
+}
+else{
     <table class="table">
 
         <thead>

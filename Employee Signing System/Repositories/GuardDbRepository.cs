@@ -98,7 +98,7 @@ namespace Employee_Signing_System.Repositories
              * Here we are nesting the query one after another by using if statements
              */
 
-            IQueryable<EmployeeTempBadge> q = _db.EmployeeTempBadges.Where(x => x.EmployeeFirstName != null);
+            IQueryable<EmployeeTempBadge> q = _db.EmployeeTempBadges.Where(x => x.TempBadge != null);
 
             if (!string.IsNullOrEmpty(fName))
             {

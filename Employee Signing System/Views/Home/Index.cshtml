@@ -74,7 +74,7 @@
                                 <tr class="align-middle">
                                     @*<td>@Html.Label(item.EFirstName+" "+item.ELastName, new { @for = item.Id}) </td>*@
                                     <td><img src="@item.PhotoUrl" width="80" height="80" style="border-radius:50%" /></td>
-                                    <td class="EName">@item.EFirstName @item.ELastName</td>
+                                    <td class="Ename">@item.EFirstName @item.ELastName</td>
                                     <td> @Html.RadioButton("imgId", item.Id ,new {@id=item.Id}) </td>
                                 </tr>
                             }
