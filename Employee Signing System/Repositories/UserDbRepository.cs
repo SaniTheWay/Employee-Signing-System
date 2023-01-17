@@ -5,7 +5,7 @@ namespace Employee_Signing_System.Repositories
 {
     public class UserDbRepository:IUserDbRepository
     {
-        EmployeeSigningSystemContext _db;
+        private readonly EmployeeSigningSystemContext _db;
         public UserDbRepository()
         {
             _db = new EmployeeSigningSystemContext();

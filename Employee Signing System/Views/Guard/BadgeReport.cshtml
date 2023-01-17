@@ -9,26 +9,23 @@
 }
 <h3>Badge Report Page</h3>
 <div class="container">
-    <div class="row">
+    <div class="row Rspace">
         @using (Html.BeginForm("BadgeReport", "Guard", FormMethod.Post))
         {
-        <lable>Start Date</lable>
-            <input type="datetime-local" name="sDate" value="@DateTime.Today" runat="server" />
-
-        <lable>End Date</lable>
-            <input type="datetime-local" name="eDate" value="@DateTime.Today" runat="server" />
-
-        <lable>First Name</lable>
-        <input type="text" name="fName" />
-
-        <lable>Last Name</lable>
-        <input type="text" name="lName"/>
+            <div class="form-control align-self-auto"> 
+                <lable>Start Date</lable>
+                <input type="datetime-local" name="sDate" value="@DateTime.Today" runat="server" />
+                <lable>End Date</lable>
+                <input type="datetime-local" name="eDate" value="@DateTime.Today" runat="server" />
+                <lable>First Name</lable>
+                <input type="text" name="fName" />
+                <lable>Last Name</lable>
+                <input type="text" name="lName"/>
+                <button type="submit" value="Search" class="btn btn-search">Search</button>
+            </div>
 
         @*<lable>inactive only</lable>
         <input type="checkbox" name="activeCheck" />*@
-
-        <button type="submit" value="Search" class="btn btn-info">Search</button>
-            
         }
     </div>
     <div class="row">
@@ -37,29 +34,26 @@
             <thead>
                 <th>Name</th>
                 <th>Badge</th>
-                <th>Sign In Time</th>
+                <th>Sign-In Time</th>
                 <th>Assign Time</th>
-                <th>Sign Out Time</th>
+                <th>Sign-Out Time</th>
             </thead>
-            <tbody class="table-striped table-hover">
+            <tbody class="table-striped">
                 @if (Model!=null)
                 {
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@item.EmployeeFirstName @item.EmployeeLastName</td>
-                        <td>@item.TempBadge</td>
-                        <td>@item.SignInT</td>
-                        <td>@item.AssignT</td>
-                        <td>@item.SignOutT</td>
-                    </tr>
-                }
-                    
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="Ename">@item.EmployeeFirstName @item.EmployeeLastName</td>
+                            <td>@item.TempBadge</td>
+                            <td>@item.SignInT</td>
+                            <td>@item.AssignT</td>
+                            <td>@item.SignOutT</td>
+                        </tr>
+                    }
                 }
             </tbody>
         </table>
         </div>
     </div>
-
-
 </div>

@@ -16,3 +16,18 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.form-control {
+    background-color:lightgrey;
+}
+
+.Ename {
+    text-transform:capitalize;
+}
+.Rspace {
+    margin-bottom:30px;
+}
+.btn-search {
+    /*color: darkseagreen;*/
+    background-color: darkseagreen;
+}

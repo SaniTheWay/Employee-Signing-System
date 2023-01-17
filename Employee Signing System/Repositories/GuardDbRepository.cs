@@ -1,6 +1,4 @@
 ﻿using Employee_Signing_System.Models.Entity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Employee_Signing_System.Models.ViewModel;
 
 namespace Employee_Signing_System.Repositories
@@ -82,7 +80,8 @@ namespace Employee_Signing_System.Repositories
                                                     TempEmployee = s,
                                                     TempEmpImg = t.PhotoUrl!
                                                 }
-                                                ).Where(e => e.TempEmployee.AssignT != null && e.TempEmployee.SignOutT == null);
+                                                );
+            q = q.Where(e => e.TempEmployee.AssignT != null && e.TempEmployee.SignOutT == null);
 
             return q;
         }

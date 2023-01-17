@@ -1,7 +1,6 @@
 ﻿using Employee_Signing_System.Models.Entity;
 using Employee_Signing_System.Repositories;
 using Employee_Signing_System.Services;
-using Microsoft.VisualStudio.TestPlatform.Common.Utilities;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -23,7 +22,7 @@ namespace ESS.Test.ATests
         }
 
         //-----------------------------------------------------
-
+        //Moq data*
         public List<EmployeeTempBadge> newRec()
         {
             List<EmployeeTempBadge> newRec = new List<EmployeeTempBadge>
@@ -46,6 +45,15 @@ namespace ESS.Test.ATests
                     AssignT = null,
                     SignOutT = null
                 },
+                new EmployeeTempBadge()
+                {
+                    EmpId = 3,
+                    EmployeeFirstName = null,
+                    EmployeeLastName = "Red",
+                    SignInT = DateTime.Today,
+                    AssignT = null,
+                    SignOutT = null
+                }
 
             };
             return newRec;
@@ -57,15 +65,23 @@ namespace ESS.Test.ATests
             var data = newRec();
             _Userdb.Setup(e => e.AddTempRecord(data[1].EmpId)).Returns(true);
 
-            var q = new UserService(_Userdb.Object);
-
+            var q1 = new UserService(_Userdb.Object);
             var result = q.queue_req(data[1].EmpId);
 
             Assert.IsType<int>(result);
             Assert.True(result==202);
-
         }
+        [Fact]
+        public void queue_req_Test2()
+        {
+            var data = newRec();
+            _Userdb.Setup(e => e.AddTempRecord(data[2].EmpId)).Returns(true);
 
+            var q2 = new UserService(_Userdb.Object);
+            var result = q.queue_req(data[1].EmpId);
 
+            Assert.IsType<int>(result);
+            Assert.True(result == 202);
+        }
     }
 }

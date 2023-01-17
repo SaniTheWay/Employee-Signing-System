@@ -43,13 +43,13 @@
                 {
                     <tr class="align-middle">
                         <td><img src=@item.TempEmpImg alt="Employee Image" width="80px" height="80px" style="border-radius:50%;"/></td>
-                        <td>@item.TempEmployee.EmployeeFirstName @item.TempEmployee.EmployeeLastName</td>
+                        <td class="Ename">@item.TempEmployee.EmployeeFirstName @item.TempEmployee.EmployeeLastName</td>
                         <td><input type="text" name="badge" id="@item.TempEmployee.Id" required/></td>
 
                         <input type="hidden" name="UId" value="@item.TempEmployee.Id"/>
                         <input type="hidden" name="assignTime" value="@DateTime.Now">
 
-                        <td><input type="submit" value="Assign Badge" class="btn-success"/></td>
+                            <td><input type="submit" value="Assign Badge" class="btn btn-search" /></td>
                     </tr>
                 }
             }
