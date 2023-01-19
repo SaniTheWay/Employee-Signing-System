@@ -13,6 +13,7 @@ builder.Services.AddControllersWithViews();
 string? connectionString = builder.Configuration.GetConnectionString("MyConn");
 builder.Services.AddDbContext<EmployeeSigningSystemContext>(options => options.UseSqlServer(connectionString));
 
+//For Identity Framework
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<EmployeeSigningSystemContext>();
 
 //Repositories Registration
