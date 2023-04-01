@@ -9,7 +9,6 @@ public partial class EmployeeTempBadge
 
     public int EmpId { get; set; }
 
-
     public string EmployeeFirstName { get; set; } = null!;
 
     public string EmployeeLastName { get; set; } = null!;
